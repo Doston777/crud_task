@@ -16,6 +16,21 @@ Vue.use(Vuex)
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
+    state: {
+      productsV: []
+    },
+    mutations: {
+      PRODUCTS(state, rec) {
+        state.productsV = rec
+      }
+    },
+    actions: {
+      async getProductsV({commit}) {
+        let res = await this.$axios.get('/product')
+        commit('PRODUCTS', res.data)
+        console.log(res, 'action');
+      }
+    },
     modules: {
       // example
     },
